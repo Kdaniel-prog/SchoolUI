@@ -71,12 +71,30 @@
         </div>
       </div>
       <div class="form-group custom-radio">
-        <input id="male" type="radio" class="custom-control-input" value=false name="isStudent" [(ngModel)]="form.isStudent">
-        <label class="custom-control-label" for="male">Teacher</label>
+        <input id="teacher" type="radio" class="custom-control-input" value=false name="isStudent" [(ngModel)]="form.isStudent">
+        <label class="custom-control-label" for="teacher">Teacher</label>
       </div>
       <div class="form-group custom-radio">
-        <input id="female" type="radio" class="custom-control-input" value=true name="isStudent" [(ngModel)]="form.isStudent">
-        <label class="custom-control-label" for="female">Student</label>
+        <input id="student" type="radio" class="custom-control-input" value=true name="isStudent" [(ngModel)]="form.isStudent">
+        <label class="custom-control-label" for="student">Student</label>
+      </div>
+      <div class="form-group">
+        <label for="name">Full name:</label>
+        <input
+          type="name"
+          class="form-control"
+          name="name"
+          [(ngModel)]="form.name"
+          required
+          minlength="6"
+          #name="ngModel"
+        />
+        <div class="alert-danger" *ngIf="name.errors && f.submitted">
+          <div *ngIf="name.errors['required']">name is required</div>
+          <div *ngIf="name.errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-block">Sign Up</button>
