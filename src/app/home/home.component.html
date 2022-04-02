@@ -1,5 +1,65 @@
 <div class="container">
   <header class="jumbotron">
     <p>{{ content }}</p>
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      News created successfully!
+    </div>
+    <div class="form-group" *ngIf="showTeacherBoard">
+      <button type="button" id="add_newsbt" class="btn btn-success" (click)="open(contentNewmsg)">Add news</button>
+    </div>
+    <table class="table" >
+      <thead>
+      <tr>
+        <th scope="col">Text</th>
+        <div class="form-group" *ngIf="showTeacherBoard">
+        <th scope="col">User_id</th>
+        </div>
+        <th scope="col">created</th>
+
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let new of news">
+        <td><span>{{new.text}}</span></td>
+        <div class="form-group" *ngIf="showTeacherBoard">
+        <td><span>{{new.user_id}}</span></td>
+        </div>
+        <td><span>{{new.created}}</span></td>
+        <div class="form-group" *ngIf="showTeacherBoard">
+        <td>
+
+          <button class="btn btn-sm btn-warning">Edit</button>
+          <button class="btn btn-sm btn-danger">Delete</button>
+
+        </td>
+        </div>
+      </tr>
+
+      </tbody>
+    </table>
   </header>
+
 </div>
+
+<ng-template #contentNewmsg let-modal>
+  <div class="modal-content" id="add_newmsg">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add news </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+          <label for="text">Text</label>
+          <div class="input-group">
+            <textarea class="form-control" name="text" type="text" id="exampleFormControlTextarea1" rows="3"  [(ngModel)]="form.text" #text="ngModel"></textarea>
+          </div>
+        </div>
+          <button data-dismiss="modal" class="btn btn-info">Submit</button>
+      </form>
+    </div>
+  </div>
+</ng-template>

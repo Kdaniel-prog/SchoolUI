@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {RouterModule} from "@angular/router";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { BoardTeacherComponent } from './board-teacher/board-teacher.component';
 import { BoardStudentComponent } from './board-student/board-student.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -28,8 +30,10 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
   ],
+  exports: [RouterModule, AppComponent],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,9 @@
+#add_newsbt{
+  float: right;
+}
+#add_newmsg{
+  z-index: 0;
+}
+.modal-content{
+  position: absolute;
+}
