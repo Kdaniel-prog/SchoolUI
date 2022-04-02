@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   form: any = {
     text: null
   };
+  private deleteID: number | undefined;
 
   constructor(private userService: UserService,
               private tokenStorageService: TokenStorageService,
@@ -104,6 +105,21 @@ export class HomeComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+  openDelete(targetModal: any, news: News) {
+    this.deleteID = news.id;
+    this.modalService.open(targetModal, {
+      backdrop: 'static',
+      size: 'lg'
+    });
+  }
+  onDelete() {
+    const deleteURL = 'http://localhost:8080/api/auth/news/' + this.deleteID + '/delete';
+    this.httpClient.delete(deleteURL)
+      .subscribe((results) => {
+        this.ngOnInit();
+        this.modalService.dismissAll();
+      });
   }
 
 }
