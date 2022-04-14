@@ -1,21 +1,24 @@
-<div class="middle">
-  <h3>News</h3>
-</div>
 <div class="container">
   <header class="jumbotron">
-
-    <div class="form-group" *ngIf="showTeacherBoard">
-      <button type="button" id="add_newsbt" class="btn btn-success" (click)="open(contentNewmsg)">Add news</button>
+    <div class="middle">
+      <h3><b>News</b></h3>
     </div>
     <div class="timeline-content">
       <div class="alert alert-success" *ngIf="isSuccessful">
         News created successfully!
       </div>
     </div>
+  </header>
+
+
+  <body class="jumbotron">
+    <div class="form-group" *ngIf="showTeacherBoard">
+      <button type="button" id="add_newsbt" class="btn btn-success" (click)="open(contentNewmsg)">Add news</button>
+    </div>
     <div class="post_settings">
       <tr *ngFor="let new of news">
         <div class="timeline-header">
-          <b><span class="username"><span>{{new.user_id}}</span> id</span></b>
+          <b><span class="username">{{new.user_id}} id</span></b>
         </div>
         <div class="timeline-content">
           <p>
@@ -25,16 +28,17 @@
         <span>{{new.created}}</span>
         <div class="form-group" *ngIf="showTeacherBoard">
           <div class="timeline-likes">
-            <div class="stats-right">
-              <button   class="btn btn-sm btn-warning" id="add_newsbt">Edit</button>
-              <button class="btn btn-sm btn-danger" id="add_newsbt" (click)="openDelete(contentDelete, new)" >Delete</button>
+            <div class="stats-right" id="add_newsbt">
+              <button   class="btn btn-sm btn-warning" (click)="openEdit(contentEditmsg,new)" >Edit</button>
+              <button class="btn btn-sm btn-danger"  (click)="openDelete(contentDelete, new)" >Delete</button>
             </div>
           </div>
         </div>
       </tr>
     </div>
-  </header>
+  </body>
 </div>
+
 
 <ng-template #contentDelete let-modal>
   <div class="modal-content">
@@ -73,6 +77,28 @@
           </div>
         </div>
           <button data-dismiss="modal" class="btn btn-info">Submit</button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentEditmsg let-modal>
+  <div class="modal-content" id="Editmsg">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editForm" novalidate>
+        <div class="form-group">
+          <label for="text">Text</label>
+          <div class="input-group">
+            <textarea id="text" formControlName="text" class="form-control" name="text" type="text" rows="3" ></textarea>
+          </div>
+        </div>
+        <button data-dismiss="modal" class="btn btn-info" (click)="onEdit()">Save</button>
       </form>
     </div>
   </div>

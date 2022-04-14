@@ -33,6 +33,5 @@ export class AuthService {
       user_id
     }, httpOptions);
   }
-
 }
 
