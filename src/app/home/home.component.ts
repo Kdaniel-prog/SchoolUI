@@ -6,6 +6,7 @@ import { UserService } from '../_services/user.service';
 import {TokenStorageService} from "../_services/token-storage.service";
 import {AuthService} from "../_services/auth.service";
 
+
 export class News {
   constructor(
     public id: number,
@@ -58,6 +59,7 @@ export class HomeComponent implements OnInit {
   }
 
   news: News[] = [];
+  limitedNews: News[] = [];
   private roles: string[] = [];
   isLoggedIn = false;
   showTeacherBoard = false;
@@ -92,11 +94,19 @@ export class HomeComponent implements OnInit {
     } );
   }
 
+  pageNumber: number = 3;
   getNews() {
     this.httpClient.get<any>('http://localhost:8080/api/auth/news').subscribe(
       response => {
         console.log(response);
         this.news = response;
+        var i = 0;
+        this.news.forEach(item =>{
+          if(this.pageNumber > i){
+            this.limitedNews.push(item)
+          }
+          i++;
+        })
       }
     );
   }
@@ -172,5 +182,29 @@ export class HomeComponent implements OnInit {
   timeConverter(d: Date) {
     var EditD = d.toString().replace('T', ' ');
     return EditD.toString().slice(0,-7);
+  }
+
+
+  rightClick() {
+    if(this.pageNumber < this.news.length){
+      this.pageNumber += 1;
+    }
+    var i = 0;
+    this.limitedNews = [];
+    this.news.forEach(item =>{
+      if(this.pageNumber > i){
+        this.limitedNews.push(item)
+      }
+      i++;
+    })
+    console.log(this.limitedNews)
+  }
+
+  leftClick() {
+    if(this.pageNumber > 0){
+      this.pageNumber -=1;
+      this.limitedNews.splice(-1,1)
+    }
+    console.log(this.limitedNews)
   }
 }
