@@ -12,6 +12,7 @@ export class News {
     public user_id: number,
     public text: string,
     public created: Date,
+    public user_name: string
   ) {
   }
 }
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   closeResult: string = "";
   errorMessage = '';
   user_id: any
+  user_name: any
   page: number = 0;
   form: any = {
     text: null
@@ -38,6 +40,7 @@ export class HomeComponent implements OnInit {
       user_id: new FormControl(),
       text: new FormControl(),
       created: new FormControl(),
+      user_name: new FormControl()
   });
 
   private deleteID: number | undefined;
@@ -66,6 +69,7 @@ export class HomeComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.user_id = user.id;
+      this.user_name = user.name;
       this.roles = user.roles;
       this.showTeacherBoard = this.roles.includes('ROLE_TEACHER');
       this.username = user.username;
@@ -82,7 +86,8 @@ export class HomeComponent implements OnInit {
       id: [''],
       user_id: [''],
       text: [''],
-      created: ['']
+      created: [''],
+      user_name: ['']
     } );
   }
 
@@ -97,7 +102,7 @@ export class HomeComponent implements OnInit {
 
   onSubmit(): void {
     const {text} = this.form;
-    this.authService.add_news(text, this.user_id).subscribe({
+    this.authService.add_news(text, this.user_id, this.user_name).subscribe({
       next: data => {
         console.log(text.toString(), data);
         this.isSuccessful = true;
@@ -140,7 +145,8 @@ export class HomeComponent implements OnInit {
       id: news.id,
       user_id: news.user_id,
       text: news.text,
-      created: news.created
+      created: news.created,
+      user_name: news.user_name
     });
   }
 
@@ -162,4 +168,8 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  timeConverter(d: Date) {
+    var EditD = d.toString().replace('T', ' ');
+    return EditD.toString().slice(0,-7);
+  }
 }

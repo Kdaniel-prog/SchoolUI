@@ -18,14 +18,14 @@
     <div class="post_settings">
       <tr *ngFor="let new of news">
         <div class="timeline-header">
-          <b><span class="username">{{new.user_id}} id</span></b>
+          <b><span class="username">{{new.user_name}}</span></b>
         </div>
         <div class="timeline-content">
           <p>
             {{new.text}}
           </p>
         </div>
-        <span>{{new.created}}</span>
+        <span>{{timeConverter(new.created)}}</span>
         <div class="form-group" *ngIf="showTeacherBoard">
           <div class="timeline-likes">
             <div class="stats-right" id="add_newsbt">

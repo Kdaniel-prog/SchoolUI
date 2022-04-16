@@ -27,10 +27,11 @@ export class AuthService {
       name
     }, httpOptions);
   }
-  add_news(text: string, user_id: any): Observable<any> {
+  add_news(text: string, user_id: any, user_name: any): Observable<any> {
     return this.http.post(AUTH_API + 'add_news', {
       text,
-      user_id
+      user_id,
+      user_name
     }, httpOptions);
   }
 }
