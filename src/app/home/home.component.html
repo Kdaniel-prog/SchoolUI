@@ -8,10 +8,14 @@
         News created successfully!
       </div>
     </div>
+      <div class="form-inline">
+        <input class="form-control mr-sm-2" [(ngModel)]="Search" type="search" placeholder="Search" aria-label="Search">
+      </div>
   </header>
 
 
   <body class="jumbotron">
+
     <div class="form-group" *ngIf="showTeacherBoard">
       <button type="button" id="add_newsbt" class="btn btn-success" (click)="open(contentNewmsg)">Add news</button>
     </div>
@@ -21,9 +25,7 @@
           <b><span class="username">{{new.user_name}}</span></b>
         </div>
         <div class="timeline-content">
-          <p>
-            {{new.text}}
-          </p>
+          <p [innerHTML]="new.text| highlightSearch: Search"></p>
         </div>
         <span>{{timeConverter(new.created)}}</span>
         <div class="form-group" *ngIf="showTeacherBoard">

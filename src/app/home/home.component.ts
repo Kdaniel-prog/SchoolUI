@@ -25,6 +25,7 @@ export class News {
 
 
 export class HomeComponent implements OnInit {
+  public Search: string = "";
   content?: string;
   modalOptions: NgbModalOptions;
   closeResult: string = "";

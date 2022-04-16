@@ -15,6 +15,7 @@ import { BoardStudentComponent } from './board-student/board-student.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { HighlightSearchPipe } from './highlight-search.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     HomeComponent,
     ProfileComponent,
     BoardTeacherComponent,
-    BoardStudentComponent
+    BoardStudentComponent,
+    HighlightSearchPipe
   ],
     imports: [
         BrowserModule,
