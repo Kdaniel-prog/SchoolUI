@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BoardTeacherComponent } from './board-teacher/board-teacher.component';
 import { BoardStudentComponent } from './board-student/board-student.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { HighlightSearchPipe } from './highlight-search.pipe';
@@ -30,6 +30,7 @@ import { HighlightSearchPipe } from './highlight-search.pipe';
   ],
     imports: [
         BrowserModule,
+        NgxPaginationModule,
         AppRoutingModule,
         FormsModule,
         HttpClientModule,

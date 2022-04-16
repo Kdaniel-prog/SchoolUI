@@ -26,6 +26,11 @@ export class News {
 
 
 export class HomeComponent implements OnInit {
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [5, 10, 15, 20];
+
   public Search: string = "";
   content?: string;
   modalOptions: NgbModalOptions;
@@ -33,7 +38,7 @@ export class HomeComponent implements OnInit {
   errorMessage = '';
   user_id: any
   user_name: any
-  page: number = 0;
+
   form: any = {
     text: null
   };
@@ -100,15 +105,7 @@ export class HomeComponent implements OnInit {
       response => {
         console.log(response);
         this.news = response;
-        var i = 0;
-        this.news.forEach(item =>{
-          if(this.pageNumber > i){
-            this.limitedNews.push(item)
-          }
-          i++;
-        })
-      }
-    );
+      });
   }
 
   onSubmit(): void {
@@ -184,27 +181,8 @@ export class HomeComponent implements OnInit {
     return EditD.toString().slice(0,-7);
   }
 
+  onTableDataChange(event: any){
+    this.page = event;
 
-  rightClick() {
-    if(this.pageNumber < this.news.length){
-      this.pageNumber += 1;
-    }
-    var i = 0;
-    this.limitedNews = [];
-    this.news.forEach(item =>{
-      if(this.pageNumber > i){
-        this.limitedNews.push(item)
-      }
-      i++;
-    })
-    console.log(this.limitedNews)
-  }
-
-  leftClick() {
-    if(this.pageNumber > 0){
-      this.pageNumber -=1;
-      this.limitedNews.splice(-1,1)
-    }
-    console.log(this.limitedNews)
   }
 }
