@@ -16,6 +16,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { HighlightSearchPipe } from './highlight-search.pipe';
+import { GradesComponent } from './grades/grades.component';
+import { SubjectsComponent } from './subjects/subjects.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { HighlightSearchPipe } from './highlight-search.pipe';
     ProfileComponent,
     BoardTeacherComponent,
     BoardStudentComponent,
-    HighlightSearchPipe
+    HighlightSearchPipe,
+    GradesComponent,
+    SubjectsComponent
   ],
     imports: [
         BrowserModule,

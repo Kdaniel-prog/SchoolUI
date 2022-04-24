@@ -34,5 +34,11 @@ export class AuthService {
       user_name
     }, httpOptions);
   }
+
+  add_subject(subject: string): Observable<any> {
+    return this.http.post(AUTH_API + 'add_subjects', {
+      subject,
+    }, httpOptions);
+  }
 }
 

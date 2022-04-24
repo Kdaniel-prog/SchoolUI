@@ -5,3 +5,54 @@
   background-color: violet;
   font-weight: bold;
 }
+.middle{
+  text-align: center;
+}
+
+.modal-content{
+  position: absolute;
+}
+
+
+.timeline-content {
+  letter-spacing: .25px;
+  line-height: 18px;
+  font-size: 13px;
+
+}
+
+.timeline-content:after,
+.timeline-content:before {
+  content: '';
+  display: table;
+  clear: both
+}
+.timeline-likes {
+  color: #6d767f;
+  font-weight: 600;
+  font-size: 12px;
+
+}
+
+.timeline-likes .stats-right {
+  float: right
+}
+
+.timeline-header {
+  padding-bottom: 10px;
+  border-bottom: 3px solid #cfd3d9;
+  line-height: 30px
+}
+
+
+.post_settings{
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+#add_bt{
+  float: right;
+}
+#add_msg{
+  z-index: 0;
+}

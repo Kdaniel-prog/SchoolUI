@@ -1,0 +1,103 @@
+<div class="container">
+  <header class="jumbotron">
+    <div class="middle">
+      <h3><b>Subjects</b></h3>
+    </div>
+    <div class="timeline-content">
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Subject created successfully!
+      </div>
+    </div>
+
+  </header>
+
+  <body class="jumbotron">
+
+
+  <div class="form-group" *ngIf="showTeacherBoard">
+    <button type="button" id="add_bt" class="btn btn-success" (click)="open(contentSubject_new_msg)">Add Subject</button>
+  </div>
+  <div class="post_settings flex-column d-flex">
+    <tr *ngFor="let subject of subjects | paginate:{itemsPerPage: tableSize, currentPage: page, totalItems: count}; let i = index">
+      <div class="timeline-header">
+        <b>{{subject.subject}}</b>
+      </div>
+      <div class="form-group" *ngIf="showTeacherBoard">
+          <div class="stats-right" id="add_bt">
+            <button   class="btn btn-sm btn-warning" (click)="openEdit(contentSubject_edit_msg, subject)" >Edit</button>
+            <button class="btn btn-sm btn-danger"  (click)="openDelete(contentDelete, subject)" >Delete</button>
+          </div>
+        </div>
+
+    </tr>
+  </div>
+  <div>
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+  </div>
+  </body>
+</div>
+
+<ng-template #contentDelete let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Confirm Delete</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2>Are you sure you want to delete this record?</h2>
+      <div class="border text-center">
+        <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentSubject_edit_msg let-modal>
+  <div class="modal-content" id="Editmsg">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editForm" novalidate>
+        <div class="form-group">
+          <label for="subject">Text</label>
+          <div class="input-group">
+            <textarea id="subject" formControlName="subject" class="form-control" name="subject" type="subject" rows="3" ></textarea>
+          </div>
+        </div>
+        <button data-dismiss="modal" class="btn btn-info" (click)="onEdit()">Save</button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentSubject_new_msg let-modal>
+  <div class="modal-content" id="add_newmsg">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add news </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <div class="input-group">
+            <textarea class="form-control" name="subject" type="subject" id="exampleFormControlTextarea1" rows="1"  [(ngModel)]="form.subject" #text="ngModel"></textarea>
+          </div>
+        </div>
+        <button data-dismiss="modal" class="btn btn-info">Submit</button>
+      </form>
+    </div>
+  </div>
+</ng-template>

@@ -17,7 +17,7 @@
   <body class="jumbotron">
 
     <div class="form-group" *ngIf="showTeacherBoard">
-      <button type="button" id="add_newsbt" class="btn btn-success" (click)="open(contentNewmsg)">Add news</button>
+      <button type="button" id="add_bt" class="btn btn-success" (click)="open(contentNewmsg)">Add news</button>
     </div>
     <div class="post_settings flex-column d-flex">
       <tr *ngFor="let new of news | paginate:{itemsPerPage: tableSize, currentPage: page, totalItems: count}; let i = index">
@@ -30,7 +30,7 @@
         <span>{{timeConverter(new.created)}}</span>
         <div class="form-group" *ngIf="showTeacherBoard">
           <div class="timeline-likes">
-            <div class="stats-right" id="add_newsbt">
+            <div class="stats-right" id="add_bt">
               <button   class="btn btn-sm btn-warning" (click)="openEdit(contentEditmsg,new)" >Edit</button>
               <button class="btn btn-sm btn-danger"  (click)="openDelete(contentDelete, new)" >Delete</button>
             </div>
@@ -42,12 +42,8 @@
       <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
       </pagination-controls>
     </div>
-
-
   </body>
-
 </div>
-
 
 
 <ng-template #contentDelete let-modal>
