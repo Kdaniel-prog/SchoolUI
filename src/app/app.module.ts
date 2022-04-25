@@ -18,6 +18,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { HighlightSearchPipe } from './highlight-search.pipe';
 import { GradesComponent } from './grades/grades.component';
 import { SubjectsComponent } from './subjects/subjects.component';
+import {OrderModule} from "ngx-order-pipe";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SubjectsComponent } from './subjects/subjects.component';
         HttpClientModule,
         NgbModule,
         ReactiveFormsModule,
+        OrderModule,
     ],
   exports: [RouterModule, AppComponent],
   providers: [authInterceptorProviders],
