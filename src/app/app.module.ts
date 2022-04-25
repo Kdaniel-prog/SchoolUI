@@ -19,6 +19,7 @@ import { HighlightSearchPipe } from './highlight-search.pipe';
 import { GradesComponent } from './grades/grades.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import {OrderModule} from "ngx-order-pipe";
+import { StudentGradeComponent } from './student-grade/student-grade.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {OrderModule} from "ngx-order-pipe";
     BoardStudentComponent,
     HighlightSearchPipe,
     GradesComponent,
-    SubjectsComponent
+    SubjectsComponent,
+    StudentGradeComponent
   ],
     imports: [
         BrowserModule,

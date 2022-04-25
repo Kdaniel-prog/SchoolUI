@@ -60,8 +60,8 @@ export class GradesComponent implements OnInit {
   isSuccessful = false;
   closeResult: string = "";
   errorMessage = '';
-  user_id: any
-  user_name: any
+  user_id: any;
+  user_name: any;
   private roles: string[] = [];
   grades: Grades[] = [];
   users1: User[] = [];
@@ -82,7 +82,7 @@ export class GradesComponent implements OnInit {
               private fb: FormBuilder,
               private orderPipe: OrderPipe) {
 
-    this.sortedCollection = orderPipe.transform(this.grades, 'info.name');
+    this.sortedCollection = orderPipe.transform(this.grades, 'user_name');
     this.modalOptions = {
       backdrop: 'static',
     }

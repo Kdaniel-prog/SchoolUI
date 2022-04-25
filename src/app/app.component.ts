@@ -9,6 +9,7 @@ export class AppComponent {
   private roles: string[] = [];
   isLoggedIn = false;
   showTeacherBoard = false;
+  showStudentBoard = false;
   username?: string;
   constructor(private tokenStorageService: TokenStorageService) { }
   ngOnInit(): void {
@@ -17,6 +18,7 @@ export class AppComponent {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showTeacherBoard = this.roles.includes('ROLE_TEACHER');
+      this.showStudentBoard = this.roles.includes('ROLE_STUDENT')
       this.username = user.username;
     }
   }

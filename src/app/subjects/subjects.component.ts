@@ -60,10 +60,11 @@ export class SubjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSubjects()
+    this.getSubjects();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
+      console.log(user)
       this.user_id = user.id;
       this.user_name = user.name;
       this.roles = user.roles;
