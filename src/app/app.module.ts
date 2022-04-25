@@ -16,6 +16,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { HighlightSearchPipe } from './highlight-search.pipe';
+import { GradesComponent } from './grades/grades.component';
+import { SubjectsComponent } from './subjects/subjects.component';
+import {OrderModule} from "ngx-order-pipe";
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { HighlightSearchPipe } from './highlight-search.pipe';
     ProfileComponent,
     BoardTeacherComponent,
     BoardStudentComponent,
-    HighlightSearchPipe
+    HighlightSearchPipe,
+    GradesComponent,
+    SubjectsComponent
   ],
     imports: [
         BrowserModule,
@@ -36,6 +41,7 @@ import { HighlightSearchPipe } from './highlight-search.pipe';
         HttpClientModule,
         NgbModule,
         ReactiveFormsModule,
+        OrderModule,
     ],
   exports: [RouterModule, AppComponent],
   providers: [authInterceptorProviders],

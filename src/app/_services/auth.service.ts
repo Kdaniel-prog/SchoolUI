@@ -34,5 +34,20 @@ export class AuthService {
       user_name
     }, httpOptions);
   }
+
+  add_subject(subject: string): Observable<any> {
+    return this.http.post(AUTH_API + 'add_subjects', {
+      subject,
+    }, httpOptions);
+  }
+
+  add_grade(grade: number, user_name: string, subject_name: string, ): Observable<any> {
+    console.log(grade,user_name,subject_name)
+    return this.http.post(AUTH_API + 'grades/add_grades', {
+      grade,
+      user_name,
+      subject_name,
+    }, httpOptions);
+  }
 }
 
