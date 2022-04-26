@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, NgForm} from "@angular/forms";
 import { UserService } from '../_services/user.service';
 import {TokenStorageService} from "../_services/token-storage.service";
 import {AuthService} from "../_services/auth.service";
+import {AppComponent} from "../app.component";
 
 
 export class News {
@@ -75,20 +76,12 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
       this.user_id = user.id;
       this.user_name = user.name;
-      this.roles = user.roles;
       this.showTeacherBoard = this.roles.includes('ROLE_TEACHER');
-      this.username = user.username;
     }
-    this.userService.getPublicContent().subscribe(
-      data => {
-        this.content = data;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
+
     this.editForm = this.fb.group({
       id: [''],
       user_id: [''],
@@ -97,7 +90,6 @@ export class HomeComponent implements OnInit {
       user_name: ['']
     } );
   }
-  pageNumber: number = 3;
 
   getNews() {
     this.httpClient.get<any>('http://localhost:8080/api/auth/news').subscribe(
@@ -107,19 +99,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  onSubmit(): void {
-    const {text} = this.form;
-    this.authService.add_news(text, this.user_id, this.user_name).subscribe({
-      next: data => {
-        console.log(text.toString(), data);
-        this.isSuccessful = true;
-      },
-    });
-    this.form ="";
-    this.modalService.dismissAll(); //dismiss the modal
-  }
-
-  private getDismissReason(reason: any): string {
+  getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -129,12 +109,25 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  open(content: any) {
+  public open(content: any) {
     this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  onSubmit(): void {
+    const {text} = this.form;
+    this.authService.add_news(text, this.user_id, this.user_name).subscribe({
+      next: data => {
+        console.log(text.toString(), data);
+        this.isSuccessful = true;
+        window.location.reload();
+      },
+    });
+    this.form ="";
+    this.modalService.dismissAll(); //dismiss the modal
   }
 
   openDelete(targetModal: any, news: News) {
@@ -144,6 +137,7 @@ export class HomeComponent implements OnInit {
       size: 'lg'
     });
   }
+
   openEdit(targetModal: any, news: News){
     this.modalService.open(targetModal, {
       backdrop: 'static',

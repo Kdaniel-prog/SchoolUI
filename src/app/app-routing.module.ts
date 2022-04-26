@@ -5,8 +5,6 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BoardStudentComponent } from './board-student/board-student.component';
-import { BoardTeacherComponent } from './board-teacher/board-teacher.component';
 import {GradesComponent} from "./grades/grades.component";
 import {SubjectsComponent} from "./subjects/subjects.component";
 import {StudentGradeComponent} from "./student-grade/student-grade.component";
@@ -18,8 +16,6 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'grades', component: GradesComponent },
   { path: 'subjects', component: SubjectsComponent },
-  { path: 'student', component: BoardStudentComponent },
-  { path: 'teacher', component: BoardTeacherComponent },
   { path: 'student-grade', component: StudentGradeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

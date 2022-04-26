@@ -10,8 +10,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BoardTeacherComponent } from './board-teacher/board-teacher.component';
-import { BoardStudentComponent } from './board-student/board-student.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
@@ -28,8 +26,6 @@ import { StudentGradeComponent } from './student-grade/student-grade.component';
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    BoardTeacherComponent,
-    BoardStudentComponent,
     HighlightSearchPipe,
     GradesComponent,
     SubjectsComponent,

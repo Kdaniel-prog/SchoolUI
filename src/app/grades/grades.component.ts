@@ -7,6 +7,7 @@ import {TokenStorageService} from "../_services/token-storage.service";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../_services/auth.service";
 import {OrderPipe} from 'ngx-order-pipe';
+import {AppComponent} from "../app.component";
 
 export class Grades {
   constructor(
@@ -58,7 +59,7 @@ export class GradesComponent implements OnInit {
   showTeacherBoard = false;
   username?: string;
   isSuccessful = false;
-  closeResult: string = "";
+
   errorMessage = '';
   user_id: any;
   user_name: any;
@@ -74,6 +75,8 @@ export class GradesComponent implements OnInit {
 
   sortedCollection: Grades[];
   modalOptions: NgbModalOptions;
+  private closeResult: string = "";
+
   constructor(private userService: UserService,
               private tokenStorageService: TokenStorageService,
               private httpClient: HttpClient,
@@ -151,12 +154,13 @@ export class GradesComponent implements OnInit {
       next: data => {
         console.log(grade.toString(),user_name.toString(),subject_name.toString(), data);
         this.isSuccessful = true;
+        window.location.reload();
       },
     });
     this.form = "";
     this.modalService.dismissAll(); //dismiss the modal
   }
-  private getDismissReason(reason: any): string {
+  getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -165,7 +169,8 @@ export class GradesComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  open(content: any) {
+
+  public open(content: any) {
     this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

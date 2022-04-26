@@ -68,6 +68,9 @@
         </div>
       </div>
     </form>
+    <div class="alert alert-danger" *ngIf="userNotExist && !isLoggedIn ">
+      User not exist!
+    </div>
     <div class="alert alert-success" *ngIf="isLoggedIn">
       Logged in as {{ roles }}.
     </div>

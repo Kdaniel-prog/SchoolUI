@@ -5,6 +5,7 @@ import {TokenStorageService} from "../_services/token-storage.service";
 import {HttpClient} from "@angular/common/http";
 import {ModalDismissReasons, NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
 import {AuthService} from "../_services/auth.service";
+import {AppComponent} from "../app.component";
 
 export class Subjects {
   constructor(
@@ -35,19 +36,16 @@ export class SubjectsComponent implements OnInit {
   };
 
   private deleteID: number | undefined;
-  content?: string;
+
   isLoggedIn = false;
   showTeacherBoard = false;
-  username?: string;
   isSuccessful = false;
-  closeResult: string = "";
-  errorMessage = '';
-  user_id: any
-  user_name: any
+
   private roles: string[] = [];
   subjects: Subjects[] = [];
 
   modalOptions: NgbModalOptions;
+  private closeResult: string  = "";
   constructor(private userService: UserService,
               private tokenStorageService: TokenStorageService,
               private httpClient: HttpClient,
@@ -64,21 +62,9 @@ export class SubjectsComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      console.log(user)
-      this.user_id = user.id;
-      this.user_name = user.name;
       this.roles = user.roles;
       this.showTeacherBoard = this.roles.includes('ROLE_TEACHER');
-      this.username = user.username;
     }
-    this.userService.getPublicContent().subscribe(
-      data => {
-        this.content = data;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
     this.editForm = this.fb.group({
       id: [''],
       subject: ['']
@@ -97,12 +83,14 @@ export class SubjectsComponent implements OnInit {
       next: data => {
         console.log(subject.toString(), data);
         this.isSuccessful = true;
+        window.location.reload();
       },
     });
     this.form = "";
     this.modalService.dismissAll(); //dismiss the modal
   }
-  private getDismissReason(reason: any): string {
+
+  getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -111,13 +99,25 @@ export class SubjectsComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  open(content: any) {
+
+  public open(content: any) {
     this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
+  onDelete() {
+    const url = 'http://localhost:8080/api/auth/subjects/' + this.deleteID + '/delete';
+    this.httpClient.delete(url)
+      .subscribe(() => {
+        this.ngOnInit();
+        this.modalService.dismissAll();
+      });
+  }
+
+
   openDelete(targetModal: any, subjects: Subjects) {
     this.deleteID = subjects.id;
     this.modalService.open(targetModal, {
@@ -125,6 +125,7 @@ export class SubjectsComponent implements OnInit {
       size: 'lg'
     });
   }
+
   openEdit(targetModal: any, subjects: Subjects){
     this.modalService.open(targetModal, {
       backdrop: 'static',
@@ -135,14 +136,7 @@ export class SubjectsComponent implements OnInit {
       subject: subjects.subject,
     });
   }
-  onDelete() {
-    const deleteURL = 'http://localhost:8080/api/auth/subjects/' + this.deleteID + '/delete';
-    this.httpClient.delete(deleteURL)
-      .subscribe((results) => {
-        this.ngOnInit();
-        this.modalService.dismissAll();
-      });
-  }
+
   onEdit(){
     const editURL = 'http://localhost:8080/api/auth/subjects/' + this.editForm.value.id + '/edit';
     console.log(this.editForm.value);

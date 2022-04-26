@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+import {observable} from "rxjs";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,6 +16,8 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  userNotExist = false;
+
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -26,7 +29,11 @@ export class LoginComponent implements OnInit {
     const { username, password } = this.form;
     this.authService.login(username, password).subscribe({
       next: data => {
+        if(data === null){
+          this.userNotExist = true;
+        }
         this.tokenStorage.saveToken(data.accessToken);
+        this.userNotExist = true;
         this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
@@ -34,11 +41,12 @@ export class LoginComponent implements OnInit {
         this.reloadPage();
       },
       error: err => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = JSON.parse(err.error).message;
         this.isLoginFailed = true;
       }
     });
   }
+
   reloadPage(): void {
     window.location.reload();
   }

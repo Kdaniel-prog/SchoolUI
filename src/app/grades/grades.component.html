@@ -1,19 +1,16 @@
 <div class="container">
   <header class="jumbotron">
     <div class="middle">
-      <h3><b>Subjects</b></h3>
+      <h3><b>Grades</b></h3>
     </div>
     <div class="timeline-content">
       <div class="alert alert-success" *ngIf="isSuccessful">
-        Subject created successfully!
+        Grade created successfully!
       </div>
     </div>
-
   </header>
 
   <body class="jumbotron">
-
-
   <div class="form-group" *ngIf="showTeacherBoard">
     <button type="button" id="add_bt" class="btn btn-success" (click)="open(contentGrade_new_msg)">Add Subject</button>
   </div>
