@@ -9,7 +9,7 @@
       </div>
     </div>
       <div class="form-inline">
-        <input class="form-control mr-sm-2" [(ngModel)]="Search" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" [(ngModel)]="Search" type="search" placeholder="Search..." aria-label="Search">
       </div>
   </header>
 
@@ -20,7 +20,7 @@
       <button type="button" id="add_bt" class="btn btn-success" (click)="open(contentNewmsg)">Add news</button>
     </div>
     <div class="post_settings flex-column d-flex">
-      <tr *ngFor="let new of news | paginate:{itemsPerPage: tableSize, currentPage: page, totalItems: count}; let i = index">
+      <tr *ngFor="let  new of news | filter: Search | paginate:{itemsPerPage: tableSize, currentPage: page, totalItems: count}; let i = index">
         <div class="timeline-header">
           <b><span class="username">{{new.user_name}}</span></b>
         </div>

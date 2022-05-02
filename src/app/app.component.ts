@@ -18,10 +18,7 @@ export class AppComponent {
   modalOptions: NgbModalOptions;
   closeResult: string = "";
 
-  constructor(private tokenStorageService: TokenStorageService,
-              private userService: UserService,
-              private httpClient: HttpClient,
-              private modalService: NgbModal) {
+  constructor(private tokenStorageService: TokenStorageService) {
     this.modalOptions = {
       backdrop: 'static',
     }

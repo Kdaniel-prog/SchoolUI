@@ -18,6 +18,7 @@ import { GradesComponent } from './grades/grades.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import {OrderModule} from "ngx-order-pipe";
 import { StudentGradeComponent } from './student-grade/student-grade.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { StudentGradeComponent } from './student-grade/student-grade.component';
         NgbModule,
         ReactiveFormsModule,
         OrderModule,
+        Ng2SearchPipeModule
     ],
   exports: [RouterModule, AppComponent],
   providers: [authInterceptorProviders],
