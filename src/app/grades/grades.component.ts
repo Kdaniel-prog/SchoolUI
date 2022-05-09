@@ -7,7 +7,6 @@ import {TokenStorageService} from "../_services/token-storage.service";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../_services/auth.service";
 import {OrderPipe} from 'ngx-order-pipe';
-import {AppComponent} from "../app.component";
 
 export class Grades {
   constructor(

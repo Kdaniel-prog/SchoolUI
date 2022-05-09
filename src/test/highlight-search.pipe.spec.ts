@@ -1,4 +1,4 @@
-import { HighlightSearchPipe } from './highlight-search.pipe';
+import { HighlightSearchPipe } from '../app/highlight-search.pipe';
 
 describe('HighlightSearchPipe', () => {
   it('create an instance', () => {
