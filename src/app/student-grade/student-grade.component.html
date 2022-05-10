@@ -1,0 +1,37 @@
+<div class="container">
+  <header class="jumbotron">
+    <div class="middle">
+      <h3><b>My Grades</b></h3>
+    </div>
+  </header>
+
+  <body class="jumbotron">
+  <div class="post_settings flex-column d-flex">
+    <div class="stats-right flex_column d-fex justify-content-between">
+      <th [class.active]="order === 'subject_name'" (click)="setOrder('subject_name')" >
+        Subject
+        <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+      </th>
+      <th [class.active]="order === 'grade'" (click)="setOrder('grade')">
+        Grade
+        <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+      </th>
+    </div>
+    <tr *ngFor="let grade of studentGrade| orderBy: order:reverse:caseInsensitive | paginate:{itemsPerPage: tableSize, currentPage: page, totalItems: count} ; let i = index">
+      <div class="timeline-header">
+
+        <b *ngIf="i == 0">{{grade.user_name}}</b>
+      </div>
+      <div class="stats-right">
+        {{grade.subject_name}}
+        {{grade.grade}}
+      </div>
+    </tr>
+  <div>
+
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+  </div>
+  </div>
+  </body>
+</div>

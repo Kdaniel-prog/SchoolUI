@@ -10,8 +10,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BoardTeacherComponent } from './board-teacher/board-teacher.component';
-import { BoardStudentComponent } from './board-student/board-student.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
@@ -19,6 +17,9 @@ import { HighlightSearchPipe } from './highlight-search.pipe';
 import { GradesComponent } from './grades/grades.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import {OrderModule} from "ngx-order-pipe";
+import { StudentGradeComponent } from './student-grade/student-grade.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,11 @@ import {OrderModule} from "ngx-order-pipe";
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    BoardTeacherComponent,
-    BoardStudentComponent,
     HighlightSearchPipe,
     GradesComponent,
-    SubjectsComponent
+    SubjectsComponent,
+    StudentGradeComponent,
+    TestComponent
   ],
     imports: [
         BrowserModule,
@@ -42,6 +43,7 @@ import {OrderModule} from "ngx-order-pipe";
         NgbModule,
         ReactiveFormsModule,
         OrderModule,
+        Ng2SearchPipeModule
     ],
   exports: [RouterModule, AppComponent],
   providers: [authInterceptorProviders],

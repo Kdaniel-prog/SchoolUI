@@ -58,10 +58,10 @@ export class GradesComponent implements OnInit {
   showTeacherBoard = false;
   username?: string;
   isSuccessful = false;
-  closeResult: string = "";
+
   errorMessage = '';
-  user_id: any
-  user_name: any
+  user_id: any;
+  user_name: any;
   private roles: string[] = [];
   grades: Grades[] = [];
   users1: User[] = [];
@@ -74,6 +74,8 @@ export class GradesComponent implements OnInit {
 
   sortedCollection: Grades[];
   modalOptions: NgbModalOptions;
+  private closeResult: string = "";
+
   constructor(private userService: UserService,
               private tokenStorageService: TokenStorageService,
               private httpClient: HttpClient,
@@ -82,7 +84,7 @@ export class GradesComponent implements OnInit {
               private fb: FormBuilder,
               private orderPipe: OrderPipe) {
 
-    this.sortedCollection = orderPipe.transform(this.grades, 'info.name');
+    this.sortedCollection = orderPipe.transform(this.grades, 'user_name');
     this.modalOptions = {
       backdrop: 'static',
     }
@@ -151,12 +153,13 @@ export class GradesComponent implements OnInit {
       next: data => {
         console.log(grade.toString(),user_name.toString(),subject_name.toString(), data);
         this.isSuccessful = true;
+        window.location.reload();
       },
     });
     this.form = "";
     this.modalService.dismissAll(); //dismiss the modal
   }
-  private getDismissReason(reason: any): string {
+  getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -165,7 +168,8 @@ export class GradesComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  open(content: any) {
+
+  public open(content: any) {
     this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
