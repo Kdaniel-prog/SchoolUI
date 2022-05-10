@@ -78,6 +78,9 @@
         <input id="student" type="radio" value=true name="isStudent" [(ngModel)]="form.isStudent">
         <label for="student">Student</label>
       </div>
+      <div class="alert-danger" *ngIf="this.form.isStudent == null && f.submitted">
+        Error: Role not selected!
+      </div>
       <div class="form-group">
         <label for="name">Full name:</label>
         <input
