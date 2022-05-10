@@ -8,9 +8,11 @@ import { ProfileComponent } from './profile/profile.component';
 import {GradesComponent} from "./grades/grades.component";
 import {SubjectsComponent} from "./subjects/subjects.component";
 import {StudentGradeComponent} from "./student-grade/student-grade.component";
+import {TestComponent} from "./test/test.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'test', component: TestComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
