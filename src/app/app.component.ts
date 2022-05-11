@@ -15,13 +15,11 @@ export class AppComponent {
   showTeacherBoard = false;
   showStudentBoard = false;
   username?: string;
-  modalOptions: NgbModalOptions;
+
   closeResult: string = "";
 
   constructor(private tokenStorageService: TokenStorageService) {
-    this.modalOptions = {
-      backdrop: 'static',
-    }
+
   }
 
   ngOnInit(): void {
